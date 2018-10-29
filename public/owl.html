@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<html>
+    <head>
+        <title>Term Finder (OWL)</title>
+    </head>
+    <header>Weather Services</header> </br>
+    <!--WEATHER SERVICE-->
+    <div class="row">
+        <div class="column">
+            <form>
+                Enter A Utah City: <input type="text" id="cityField" value="">
+                <input id="weatherButton" type="submit" value="Submit"></br>
+                Suggestion: <span id="txtHint">Empty</span> <br/>
+                
+            </form>
+        </div>
+        <div class="columnTwo">
+    <!--OWL SERVICE-->
+            <form>
+                Enter a word: <input type="text" id="owlform" value=""><br/>
+                <button id="owlbutton">Submit</button>
+            </form>
+            Definition: <span id="owldef">Empty</span>
+        </div>
+    </div>
+    <script>
+    /*global $*/
+        $("#cityField").keyup(function(event) {
+            event.preventDefault();
+            var cUrl = "city?q=" + $("#cityField").val();
+            $.getJSON(cUrl, function(data) {
+                var cities; 
+                cities = "<ul>";
+                $.each(data, function(i,item) {
+                    cities += "<li>" +data[i].city;
+                });
+                cities += "</ul>";
+                $("#txtHint").html(cities);
+            });
+        });
+        $("#owlbutton").click(function(event) {
+            event.preventDefault();
+            var url ="owl?q=" + $("#owlform").val();
+            console.log(url);
+            $.getJSON(url, function(data) {
+                var everything;
+                everything = "<ul>";
+                $.each(data, function(i,item) {
+                    everything += "<li>"+data[i].defenition+"</li>";
+                });
+                everything += "</ul>";
+                console.log(everything);
+                $("#owldef").html(everything);
+            });
+        });
+    </script>
+</html>

@@ -1,0 +1,4 @@
+create own rest service that will get the word and return noun and definition (https://owlbot.info/api/v1/dictionary + WORD + ?format=json)
+
+OWLBOT PORTION: 
+
